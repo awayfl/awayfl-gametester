@@ -1,0 +1,37 @@
+{
+  "name": "templateeditor",
+  "version": "1.0.0",
+  "main": "src/editor.js",
+  "license": "MIT",
+  "scripts": {
+    "watch": "parcel src/index.html",
+    "build": "parcel build src/index.html --public-url replacethislinewithadot && sed -i '' 's/replacethislinewithadot/./g' dist/index.html",
+    "build-netlify": "parcel build src/index.html --public-url replacethislinewithadot && sed -i 's/replacethislinewithadot/./g' dist/index.html"
+  },
+  "staticFiles": {
+    "staticPath": "static",
+    "watcherGlob": "**"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.6.0",
+    "@babel/runtime": "^7.6.0",
+    "@material/ripple": "^3.1.0",
+    "@material/switch": "^3.1.0",
+    "debounce": "^1.2.0",
+    "events": "^3.0.0",
+    "fabric": "^3.4.0",
+    "html2canvas": "^1.0.0-rc.5",
+    "keycode": "^2.2.0",
+    "nanoid": "^2.1.10",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.3.1",
+    "pouchdb": "^7.1.1",
+    "sortablejs": "^1.10.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "cssnano": "^4.1.10",
+    "jszip": "^3.2.2"
+  }
+}
