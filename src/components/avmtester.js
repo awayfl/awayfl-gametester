@@ -20,7 +20,7 @@ class AVMTester extends Component {
 		return `
 		<div style="display:grid;">
 		<span>AVM${this.version} ...loading</span>
-		<iframe style="width:550px;height:450px"src="./avms/avm${this.version}.html"></iframe>
+		<iframe style="width:550px;height:450px"src="./avms/avm.html"></iframe>
 		</div>
 		`;
 	}

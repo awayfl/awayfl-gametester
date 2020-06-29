@@ -6,18 +6,34 @@
   "scripts": {
     "watch": "parcel src/index.html",
     "build": "parcel build src/index.html --public-url replacethislinewithadot && sed -i '' 's/replacethislinewithadot/./g' dist/index.html",
-    "build-netlify": "parcel build src/index.html --public-url replacethislinewithadot && sed -i 's/replacethislinewithadot/./g' dist/index.html"
+    "build-netlify": "parcel build src/index.html --public-url replacethislinewithadot && sed -i 's/replacethislinewithadot/./g' dist/index.html",
+    "clean:away": "npm run rimraf -- static/avms/scripts/away",
+    "prebuild:prod": "npm run clean:away",
+    "build:away": "webpack --config webpack.config.js  --progress --env.prod"
   },
   "staticFiles": {
     "staticPath": "static",
     "watcherGlob": "**"
   },
   "dependencies": {
+    "@awayfl/avm1": "^0.2.0",
+    "@awayfl/avm2": "^0.2.0",
+    "@awayfl/awayfl-player": "^0.2.0",
+    "@awayfl/playerglobal": "^0.2.0",
+    "@awayfl/swf-loader": "^0.4.0",
+    "@awayjs/core": "^0.9.0",
+    "@awayjs/graphics": "^0.5.0",
+    "@awayjs/materials": "^0.6.0",
+    "@awayjs/renderer": "^0.11.0",
+    "@awayjs/scene": "^0.13.0",
+    "@awayjs/stage": "^0.11.0",
+    "@awayjs/view": "^0.6.0",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-transform-runtime": "^7.6.0",
     "@babel/runtime": "^7.6.0",
     "@material/ripple": "^3.1.0",
     "@material/switch": "^3.1.0",
+    "copy-webpack-plugin": "^6.0.2",
     "debounce": "^1.2.0",
     "events": "^3.0.0",
     "fabric": "^3.4.0",
@@ -26,12 +42,19 @@
     "nanoid": "^2.1.10",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-static-files-copy": "^2.4.3",
+    "poki-player": "awaystudios/poki-player",
     "pouchdb": "^7.1.1",
-    "sortablejs": "^1.10.2"
+    "sortablejs": "^1.10.2",
+    "terser-webpack-plugin": "^3.0.6",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.5",
+    "webpack": "^4.43.0",
+    "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "cssnano": "^4.1.10",
-    "jszip": "^3.2.2"
+    "jszip": "^3.2.2",
+    "webpack-cli": "^3.3.12"
   }
 }

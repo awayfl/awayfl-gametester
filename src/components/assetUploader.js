@@ -51,14 +51,10 @@ class AssetUploader extends Component {
 			list.appendChild(li);
 
 			const testButton = document.createElement('button');
-			testButton.innerText = 'test avm1';
+			testButton.innerText = 'test avm';
 			li.appendChild(testButton);
 			this.setTestButtonFunctionality(testButton, 1);
 
-			const testButton2 = document.createElement('button');
-			testButton2.innerText = 'test avm2';
-			li.appendChild(testButton2);
-			this.setTestButtonFunctionality(testButton2, 2);
 
 		});
 
