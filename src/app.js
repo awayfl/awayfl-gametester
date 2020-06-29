@@ -6,16 +6,15 @@ class App {
         this.init();
     }
     async init() {
-        const currentGame = document.cookie || 'default';
-        this.loadGame(currentGame);
+        const dbName = 'awayjs-gametester';
+        this.loadDB(dbName);
     }
 
-    async loadGame(name){
+    async loadDB(name){
         if(this.currentEditor) this.currentEditor.container.parentNode.removeChild(this.currentEditor.container);
         const data = await Database.load(name);
         this.editorPages = [UploadPage];
         this.currentEditor = new this.editorPages[0](this);
-        document.cookie = name;
     }
 
     nextScreen(){
