@@ -1,11 +1,5 @@
 import Component from "./component";
-import { Sortable, MultiDrag } from 'sortablejs';
 import Database from "../utils/database";
-import globals from "../utils/globals";
-
-Sortable.mount(new MultiDrag());
-
-
 
 class AssetUploader extends Component {
 
@@ -54,29 +48,8 @@ class AssetUploader extends Component {
 			testButton.innerText = 'test avm';
 			li.appendChild(testButton);
 			this.setTestButtonFunctionality(testButton, 1);
-
-
 		});
 
-		Sortable.create(list, {
-			group: {
-				name: globals.SORTABLE_GROUP_LAYER,
-				pull: 'clone',
-				put: false,
-				revertClone: true
-			},
-			sort: false,
-			forceFallback: true,
-			multiDrag: true,
-			selectedClass: 'sortablejs-selected',
-			onEnd:(e)=>{
-				const clones = e.clones.length > 0 ? e.clones : [e.clone];
-				clones.forEach((clone)=>{
-					const button = clone.querySelector('button');
-					this.setTestButtonFunctionality(button);
-				});
-			},
-		});
 	}
 	setTestButtonFunctionality(button, version){
 		const cancelEvents = (e)=>{
@@ -95,14 +68,37 @@ class AssetUploader extends Component {
 	}
 	initUploadButton() {
 		const uploadButton = this.element.querySelector('.upload');
+		const self = this.element;
 		uploadButton.addEventListener('change', async (e) => {
 			await Database.uploadFiles(e.target.files);
 			document.dispatchEvent(new Event(AssetUploader.EVENT_UPLOAD_ASSET));
 		})
+
+		uploadButton.addEventListener('dragenter', (e) => {
+            e.preventDefault();
+            self.classList.toggle('over', true);
+		}, false)
+
+        uploadButton.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            self.classList.toggle('over', false);
+        }, false)
+
+        uploadButton.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        }, false)
+
+        uploadButton.addEventListener('drop', async (e) => {
+            e.preventDefault();
+            self.classList.toggle('over', false);
+			await Database.uploadFiles(e.dataTransfer.files);
+			document.dispatchEvent(new Event(AssetUploader.EVENT_UPLOAD_ASSET));
+        }, false);
+
 	}
 	html() {
 		return /*html*/ `
-		<div style="margin:20px;">
+		<div style="margin:20px;" class = "uploader">
 			<label for="upload">Upload:</label>
 			<input class="upload" type="file" data-multiple-caption="{count} files selected" multiple id="upload">
 			<div>

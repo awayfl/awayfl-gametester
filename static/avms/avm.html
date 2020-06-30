@@ -75,9 +75,8 @@
 
 		function handleMessages(message) {
 			if (message.data.type === "sendSwfData") {
-				
-				config.width= 550;
-				config.height= 550;
+				config.width= window.innerWidth;
+				config.height= window.innerHeight;
 				config.splash="./assets/generic.jpg";
 				config.progress = {
 					rect: [0, 0.7, 1, 0.1],
