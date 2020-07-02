@@ -35,8 +35,6 @@ module.exports = (env = {}) => {
 				//{ test: /\.js(x?)/, loader: require.resolve('source-map-loader') }
 			]
 		},
-		plugins: [],
-
 		performance: {
 			hints: false // wp4
 		},
